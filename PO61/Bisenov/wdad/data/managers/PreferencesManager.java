@@ -92,14 +92,11 @@ public class PreferencesManager {
         for (String s : keySet) {
             setProperty(s, table.get(s));
         }
-        //prop.stringPropertyNames().forEach(s -> setProperty(s,prop.getProperty(s)));
     }
 
     public Hashtable<String, String> getProperties() {
         Hashtable<String, String> props = new Hashtable<>();
-        //Properties properties = new Properties();
         for(String s : keys){
-            //properties.setProperty(s,document.getElementsByTagName(lastElementKey(s)).item(0).getTextContent());
             try {
                 props.put(s, getProperty(s));
             } catch (PreferencesManagerException e) {
@@ -150,7 +147,7 @@ public class PreferencesManager {
     }
 
     @Deprecated
-    public void setCreateRegistry(String createRegistry) throws TransformerException {
+    public void setCreateRegistry(String createRegistry) {
         document.getElementsByTagName("createregistry").item(0).setTextContent(createRegistry);
         saveXML();
     }
@@ -161,7 +158,7 @@ public class PreferencesManager {
     }
 
     @Deprecated
-    public void setRegistryAddress(String registryAddress) throws TransformerException {
+    public void setRegistryAddress(String registryAddress) {
         document.getElementsByTagName("registryaddress").item(0).setTextContent(registryAddress);
         saveXML();
     }
@@ -172,7 +169,7 @@ public class PreferencesManager {
     }
 
     @Deprecated
-    public void setRegistryPort(String registryPort) throws TransformerException {
+    public void setRegistryPort(String registryPort) {
         document.getElementsByTagName("registryport").item(0).setTextContent(registryPort);
         saveXML();
     }
@@ -183,7 +180,7 @@ public class PreferencesManager {
     }
 
     @Deprecated
-    public void setPolicyPath(String policyPath) throws TransformerException {
+    public void setPolicyPath(String policyPath) {
         document.getElementsByTagName("policypath").item(0).setTextContent(policyPath);
         saveXML();
     }
@@ -194,7 +191,7 @@ public class PreferencesManager {
     }
 
     @Deprecated
-    public void setUseCodeBaseOnly(String useCodeBaseOnly) throws TransformerException {
+    public void setUseCodeBaseOnly(String useCodeBaseOnly) {
         document.getElementsByTagName("usecodebaseonly").item(0).setTextContent(useCodeBaseOnly);
         saveXML();
     }
@@ -205,7 +202,7 @@ public class PreferencesManager {
     }
 
     @Deprecated
-    public void setClassProvider(String classProvider) throws TransformerException {
+    public void setClassProvider(String classProvider) {
         document.getElementsByTagName("classprovider").item(0).setTextContent(classProvider);
         saveXML();
     }
