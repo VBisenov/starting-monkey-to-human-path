@@ -31,7 +31,7 @@ public class PreferencesManager {
     private Document document;
     private XPath xPath;
 
-    public static final String prefPath = "./src/PO61/Bisemov/wdad/learn/xml/organization.xml";
+    public static final String prefPath = "./src/PO61/Bisnov/wdad/learn/xml/organization.xml";
 
     private static final String[] keys = {"appconfig.rmi.server.registry.createregistry",
             "appconfig.rmi.server.registry.registryaddress",
