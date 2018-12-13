@@ -72,11 +72,9 @@ public class PreferencesManager {
     }
 
     public String getProperty(String key) throws PreferencesManagerException {
-        //todo use xPath
         Node node;
         try {
             node = (Node)xPath.evaluate(key.replace('.', '/'), document, XPathConstants.NODE);
-            // todo understand why null
             if (document == null) {
                 System.out.println("null");
             } else {
