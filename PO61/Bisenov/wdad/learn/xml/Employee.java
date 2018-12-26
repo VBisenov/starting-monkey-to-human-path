@@ -1,29 +1,42 @@
 package PO61.Bisenov.wdad.learn.xml;
 
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.annotation.XmlElement;
 import java.time.LocalDate;
 
 public class Employee {
-    private String firstName;
-    private String secondName;
     private LocalDate hireDate;
     private int salary;
-    private JobTitleEnum jobTitle;
+    private JOB_TITLES_ENUM jobTitle;
+    private String firstName;
+    private String secondName;
 
-    public Employee(String firstName, String secondName, int salary, JobTitleEnum jobTitle) throws JAXBException{
-        this(firstName, secondName, salary, LocalDate.now(), jobTitle);
+    public Employee(String firstName, String secondName, int salary, JOB_TITLES_ENUM jobTitle){
+        this(firstName, secondName, salary, jobTitle, LocalDate.now());
     }
 
-    public Employee(String firstName, String secondName, int salary, LocalDate hireDate, JobTitleEnum jobTitle) throws JAXBException {
+    public Employee(String firstName, String secondName, int salary, JOB_TITLES_ENUM jobTitle, LocalDate hireDate){
         this.firstName = firstName;
         this.secondName = secondName;
         this.salary = salary;
+        this.jobTitle = jobTitle;
         this.hireDate = hireDate;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(int salary) {
+        this.salary = salary;
+    }
+
+    public JOB_TITLES_ENUM getJobTitle() {
+        return jobTitle;
+    }
+
+    public void setJobTitle(JOB_TITLES_ENUM jobTitle) {
         this.jobTitle = jobTitle;
     }
 
-    @XmlElement (name = "firstname")
     public String getFirstName() {
         return firstName;
     }
@@ -32,7 +45,6 @@ public class Employee {
         this.firstName = firstName;
     }
 
-    @XmlElement (name = "secondname")
     public String getSecondName() {
         return secondName;
     }
@@ -41,31 +53,20 @@ public class Employee {
         this.secondName = secondName;
     }
 
-    @XmlElement (name = "hiredate")
-    public LocalDate getHireDate() {
-        return hireDate;
+    @Override
+    public String toString() {
+        return String.format("%s %s, %s, %d", firstName, secondName, jobTitle.toString(), salary);
     }
 
-    public void setHireDate(LocalDate hireDate) {
-        this.hireDate = hireDate;
+    @Override
+    public boolean equals(Object obj) {
+        Employee emp = (Employee) obj;
+        return emp.getFirstName().equals(firstName) && emp.getSecondName().equals(secondName) &&
+                emp.getJobTitle().equals(jobTitle) && emp.getSalary() == salary;
     }
 
-    @XmlElement (name = "salary")
-    public int getSalary() {
-        return salary;
+    @Override
+    public int hashCode() {
+        return firstName.hashCode() ^ secondName.hashCode() ^ jobTitle.hashCode() ^ salary;
     }
-
-    public void setSalary(int salary) {
-        this.salary = salary;
-    }
-
-    @XmlElement (name = "jobtitle")
-    public JobTitleEnum getJobTitle() {
-        return jobTitle;
-    }
-
-    public void setJobTitle(JobTitleEnum jobTitle) {
-        this.jobTitle = jobTitle;
-    }
-
 }

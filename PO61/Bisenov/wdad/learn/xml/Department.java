@@ -1,11 +1,10 @@
 package PO61.Bisenov.wdad.learn.xml;
 
-import javax.xml.bind.annotation.XmlElement;
 import java.util.ArrayList;
 
 public class Department {
-    private ArrayList<Employee> employees;
     private String name;
+    private ArrayList<Employee> employees;
 
     public Department(String name){
         this(name, new ArrayList<>());
@@ -16,39 +15,34 @@ public class Department {
         this.employees = employees;
     }
 
-    public int size(){
-        return employees.size();
-    }
-
-    @XmlElement
-    public ArrayList<Employee> getEmployees() {
-        return employees;
-    }
-    @XmlElement(name = "name")
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public ArrayList<Employee> getEmployees() {
+        return employees;
+    }
+
+    public int size(){
+        return employees.size();
     }
 
     public void add(Employee employee){
-        this.employees.add(employee);
+        employees.add(employee);
     }
 
-    public double salaryAverage(){
-        double salary = 0;
-        for (Employee employee: employees) {
-            salary += employee.getSalary();
+    public int salaryAverage(){
+        int result = 0;
+        for (Employee employee: employees){
+            result += employee.getSalary();
         }
-        return salary/employees.size();
+        return result/size();
     }
 
     public boolean isExist(String firstName, String secondName){
         for (Employee employee: employees){
-                if (employee.getFirstName().equals(firstName) && employee.getSecondName().equals(secondName)) {
-                    return true;
+            if (employee.getFirstName().equals(firstName) && employee.getSecondName().equals(secondName)){
+                return true;
             }
         }
         return false;
@@ -64,11 +58,18 @@ public class Department {
     }
 
     public void remove(String firstName, String secondName){
-        employees.remove(getEmployee(firstName, secondName));
-//        for(Employee employee: employees){
-//            if (employee.getFirstName().equals(firstName) && employee.getSecondName().equals(secondName)){
-//                employees.remove(employee);
-//            }
-//        }
+        for (Employee employee: employees){
+            if (employee.getFirstName().equals(firstName) && employee.getSecondName().equals(secondName)){
+                employees.remove(employee);
+            }
+        }
+    }
+
+    public int salary(){
+        int result = 0;
+        for (Employee employee: employees){
+            result += employee.getSalary();
+        }
+        return result;
     }
 }

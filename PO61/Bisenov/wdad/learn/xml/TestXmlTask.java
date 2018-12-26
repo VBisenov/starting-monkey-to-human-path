@@ -1,30 +1,33 @@
 package PO61.Bisenov.wdad.learn.xml;
 
-import javax.xml.bind.JAXBException;
-import java.io.File;
-
 public class TestXmlTask {
-    public static void main(String[] args) throws JAXBException {
-        File file = new File("C:\\Users\\Владимир\\Desktop\\Учёба\\Лабы\\Java\\starting-monkey-to-human-path\\src\\PO61\\Bisenov\\wdad\\learn\\xml\\organization.xml");
-        Employee firstEmployee = new Employee("Henry", "Thomassino", 5000, JobTitleEnum.assistant);
-        Employee secondEmployee = new Employee("Joe", "Barbaro", 6000, JobTitleEnum.boss);
+    public static void main(String[] args) {
+        Employee firstEmployee = new Employee("Harry", "Potter", 5000, JOB_TITLES_ENUM.ASSISTANT);
+        Employee secondEmployee = new Employee("Ron", "Wisley", 4000, JOB_TITLES_ENUM.ENGINEER);
+        Employee thirdEmployee = new Employee("Hermiona", "Granger", 6000, JOB_TITLES_ENUM.HEAD);
 
-        Department department = new Department("dep");
-        department.add(firstEmployee);
-        department.add(secondEmployee);
+        Employee fourthEmployee = new Employee("Draco", "Malfoy", 3000,JOB_TITLES_ENUM.HEAD);
+        Employee fifthEmployee = new Employee("Vincent", "Crabbe", 4000, JOB_TITLES_ENUM.ASSISTANT);
 
-        Organization organization = new Organization();
-        organization.add(department);
+        Department firstDepartment = new Department("Griffindor");
+        firstDepartment.add(firstEmployee);
+        firstDepartment.add(secondEmployee);
+        firstDepartment.add(thirdEmployee);
 
-        XmlTask task = new XmlTask(organization, file);
+        Department secondDepartment = new Department("Slytherin");
+        secondDepartment.add(fourthEmployee);
+        secondDepartment .add(fifthEmployee);
 
-        task.setSalary("Joe","Barbaro", 5);
-        task.setJobTitle("Henry", "Thomassino", JobTitleEnum.engineer);
-     
-        System.out.println(task.salaryAverage("dep"));
-        System.out.println(task.salaryAverage());
-        task.fireEmployee("Joe", "Barbaro");
-        task.writeXML(file);
-        
+        Organization organization = new Organization("Hogwarts");
+        organization.add(firstDepartment);
+        organization.add(secondDepartment);
+
+        XmlTask xmlTask = new XmlTask(organization);
+
+        System.out.println(xmlTask.salaryAverage());
+        System.out.println(xmlTask.salaryAverage("Slytherin"));
+        xmlTask.setSalary("Harry", "Potter", 4000);
+        xmlTask.setJobTitle("Harry", "Potter", JOB_TITLES_ENUM.HEAD);
+        xmlTask.fireEmployee("Ron", "Wisley");
     }
 }
