@@ -1,6 +1,7 @@
 package PO61.Bisenov.wdad.learn.xml;
 
 public class XmlTask {
+
     private Organization organization;
 
     public XmlTask(Organization organization){
@@ -15,12 +16,12 @@ public class XmlTask {
         return organization.salaryAverage(departmentName);
     }
 
-    public void setJobTitle(String firstName, String secondName, JOB_TITLES_ENUM newJobTitle){
+    public void setJobTitle(String firstName, String secondName, JobTitlesEnum newJobTitle){
         organization.setJobTitle(firstName, secondName, newJobTitle);
     }
 
-    public void setSalary(String firstName, String secondName, int salary){
-        organization.setSalary(firstName, secondName, salary);
+    public void setSalary(String firstName, String secondName, int newSalary){
+        organization.setSalary(firstName, secondName, newSalary);
     }
 
     public void fireEmployee(String firstName, String secondName){

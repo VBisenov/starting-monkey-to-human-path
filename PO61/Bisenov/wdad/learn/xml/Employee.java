@@ -1,39 +1,33 @@
 package PO61.Bisenov.wdad.learn.xml;
 
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
 
+@XmlRootElement(name = "employee")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(propOrder = {"firstName","secondName","hireDate","salary","jobTitle"})
+
 public class Employee {
+    private String firstName, secondName;
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     private LocalDate hireDate;
     private int salary;
-    private JOB_TITLES_ENUM jobTitle;
-    private String firstName;
-    private String secondName;
+    private JobTitlesEnum jobTitle;
 
-    public Employee(String firstName, String secondName, int salary, JOB_TITLES_ENUM jobTitle){
-        this(firstName, secondName, salary, jobTitle, LocalDate.now());
+    public Employee(){
+
     }
 
-    public Employee(String firstName, String secondName, int salary, JOB_TITLES_ENUM jobTitle, LocalDate hireDate){
+    public Employee(String firstName, String secondName, int salary, JobTitlesEnum jobTitle){
+        this(firstName, secondName, LocalDate.now(), salary, jobTitle);
+    }
+
+    private Employee(String firstName, String secondName, LocalDate hireDate, int salary, JobTitlesEnum jobTitle){
         this.firstName = firstName;
         this.secondName = secondName;
-        this.salary = salary;
-        this.jobTitle = jobTitle;
         this.hireDate = hireDate;
-    }
-
-    public double getSalary() {
-        return salary;
-    }
-
-    public void setSalary(int salary) {
         this.salary = salary;
-    }
-
-    public JOB_TITLES_ENUM getJobTitle() {
-        return jobTitle;
-    }
-
-    public void setJobTitle(JOB_TITLES_ENUM jobTitle) {
         this.jobTitle = jobTitle;
     }
 
@@ -41,32 +35,35 @@ public class Employee {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
     public String getSecondName() {
         return secondName;
     }
 
-    public void setSecondName(String secondName) {
-        this.secondName = secondName;
+    public LocalDate getHireDate() {
+        return hireDate;
     }
 
-    @Override
-    public String toString() {
-        return String.format("%s %s, %s, %d", firstName, secondName, jobTitle.toString(), salary);
+    public int getSalary() {
+        return salary;
+    }
+
+    public JobTitlesEnum getJobTitle() {
+        return jobTitle;
+    }
+
+    public void setJobTitle(JobTitlesEnum jobTitle) {
+        this.jobTitle = jobTitle;
+    }
+
+    public void setSalary(int salary) {
+        this.salary = salary;
     }
 
     @Override
     public boolean equals(Object obj) {
         Employee emp = (Employee) obj;
-        return emp.getFirstName().equals(firstName) && emp.getSecondName().equals(secondName) &&
-                emp.getJobTitle().equals(jobTitle) && emp.getSalary() == salary;
-    }
 
-    @Override
-    public int hashCode() {
-        return firstName.hashCode() ^ secondName.hashCode() ^ jobTitle.hashCode() ^ salary;
+        return emp.getFirstName().equals(firstName) && emp.getSecondName().equals(secondName) && emp.getHireDate().equals(hireDate)
+                && emp.getSalary() == salary && emp.getJobTitle().equals(jobTitle);
     }
 }

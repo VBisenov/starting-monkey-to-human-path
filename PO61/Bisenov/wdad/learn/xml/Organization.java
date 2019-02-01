@@ -1,10 +1,19 @@
 package PO61.Bisenov.wdad.learn.xml;
 
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 
+@XmlRootElement(namespace = "C:\\Users\\Владимир\\Desktop\\Учёба\\3 курс\\Java\\starting-monkey-to-human-path\\src\\PO61\\Bisenov\\wdad\\learn\\xml\\organization.xml")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(propOrder = {"name", "departments"})
 public class Organization {
     private String name;
+
+    @XmlElement(name = "department")
     private ArrayList<Department> departments;
+
+    public Organization(){
+    }
 
     public Organization(String name){
         this(name, new ArrayList<>());
@@ -23,37 +32,40 @@ public class Organization {
         return departments;
     }
 
+
     public void add(Department department){
-        departments.add(department);
+        this.departments.add(department);
     }
 
-    public int size() {
-        return departments.size();
-    }
 
-    public int salaryAverage(){
-        int result = 0;
-        int count = 0;
-        for (Department department: departments){
-            result += department.salary();
-            count += department.size();
-        }
-        return result/count;
-    }
-
-    public int salaryAverage(String departmentName){
+    public int resultSalary(){
         int result = 0;
         for (Department department: departments){
-            if (department.getName().equals(departmentName)){
-                result = department.salaryAverage();
-            }
+            result += department.resultSalary();
         }
         return result;
     }
 
-    public void setJobTitle(String firstName, String secondName, JOB_TITLES_ENUM newJobTitle){
+    public int salaryAverage(){
+        int count = 0;
         for (Department department: departments){
-            if (department.isExist(firstName, secondName)){
+            count += department.getEmployees().size();
+        }
+        return resultSalary() / count;
+    }
+
+    public int salaryAverage(String departmentName){
+        for (Department department: departments){
+            if (departmentName.equals(department.getName())){
+                return department.salaryAverage();
+            }
+        }
+        return 0;
+    }
+
+    public void setJobTitle(String firstName, String secondName, JobTitlesEnum newJobTitle){
+        for (Department department: departments){
+            if (department.isExist(firstName, secondName)) {
                 department.getEmployee(firstName, secondName).setJobTitle(newJobTitle);
             }
         }
@@ -70,7 +82,7 @@ public class Organization {
     public void fireEmployee(String firstName, String secondName){
         for (Department department: departments){
             if (department.isExist(firstName, secondName)){
-                department.remove(firstName, secondName);
+                department.remove(firstName,secondName);
             }
         }
     }

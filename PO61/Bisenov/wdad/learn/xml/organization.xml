@@ -1,15 +1,31 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE organization SYSTEM "C:\\Users\\Владимир\\Desktop\\Учёба\\3 курс\\Java\\starting-monkey-to-human-path\\src\\PO61\\Bisenov\\wdad\\learn\\xml\\organization.dtd">
-<organization name="Apple">
-    <department name="Engineering">
-        <employee firstname="Paul" secondname="Riccardo">
-            <hiredate>
-                11.12.2016
-            </hiredate>
-            <salary>
-                200000
-            </salary>
-            <jobtitle value="secretary"/>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:organization xmlns:ns2="C:\Users\Владимир\Desktop\Учёба\3 курс\Java\starting-monkey-to-human-path\src\PO61\Bisenov\wdad\learn\xml\organization.xml">
+    <name>Apple</name>
+    <department>
+        <name>Software</name>
+        <employee>
+            <firstName>Pasha</firstName>
+            <secondName>Bastrikov</secondName>
+            <hireDate>2019-02-01</hireDate>
+            <salary>55000</salary>
+            <jobTitle>ASSISTANT</jobTitle>
+        </employee>
+        <employee>
+            <firstName>Vova</firstName>
+            <secondName>Bisenov</secondName>
+            <hireDate>2019-02-01</hireDate>
+            <salary>80000</salary>
+            <jobTitle>ENGINEER</jobTitle>
         </employee>
     </department>
-</organization>
+    <department>
+        <name>Security</name>
+        <employee>
+            <firstName>Egor</firstName>
+            <secondName>Arutov</secondName>
+            <hireDate>2019-02-01</hireDate>
+            <salary>50000</salary>
+            <jobTitle>HEAD</jobTitle>
+        </employee>
+    </department>
+</ns2:organization>

@@ -1,10 +1,21 @@
 package PO61.Bisenov.wdad.learn.xml;
 
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
+
+@XmlRootElement(name = "department")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(propOrder = {"name", "employees"})
 
 public class Department {
     private String name;
+
+    @XmlElement(name = "employee")
     private ArrayList<Employee> employees;
+
+    public Department(){
+
+    }
 
     public Department(String name){
         this(name, new ArrayList<>());
@@ -23,20 +34,20 @@ public class Department {
         return employees;
     }
 
-    public int size(){
-        return employees.size();
-    }
-
     public void add(Employee employee){
-        employees.add(employee);
+        this.employees.add(employee);
     }
 
-    public int salaryAverage(){
+    public int resultSalary(){
         int result = 0;
         for (Employee employee: employees){
             result += employee.getSalary();
         }
-        return result/size();
+        return result;
+    }
+
+    public int salaryAverage(){
+        return resultSalary()/this.employees.size();
     }
 
     public boolean isExist(String firstName, String secondName){
@@ -63,13 +74,5 @@ public class Department {
                 employees.remove(employee);
             }
         }
-    }
-
-    public int salary(){
-        int result = 0;
-        for (Employee employee: employees){
-            result += employee.getSalary();
-        }
-        return result;
     }
 }
