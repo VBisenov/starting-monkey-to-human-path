@@ -86,4 +86,13 @@ public class Organization {
             }
         }
     }
+
+    public boolean contains(Department department){
+        for (Department d: departments){
+            if (d.equals(department)){
+                return true;
+            }
+        }
+        return false;
+    }
 }
