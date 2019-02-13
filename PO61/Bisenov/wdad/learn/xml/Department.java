@@ -75,4 +75,10 @@ public class Department {
             }
         }
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        Department department = (Department) obj;
+        return department.getName().equals(getName()) && department.getEmployees().equals(getEmployees());
+    }
 }
