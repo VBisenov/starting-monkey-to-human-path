@@ -7,8 +7,8 @@ public class XmlDataManagerImpl implements XmlDataManager{
     /*
     нужно создать объект XmlTask и через него реализовать эти методы
      */
-    public XmlDataManagerImpl(Organization organization){
-        xmlTask = new XmlTask(organization);
+    public XmlDataManagerImpl(){
+        xmlTask = new XmlTask();
     }
 
     @Override

@@ -6,12 +6,13 @@ import PO61.Bisenov.wdad.learn.xml.Employee;
 import PO61.Bisenov.wdad.learn.xml.JobTitlesEnum;
 
 import java.rmi.Remote;
+import java.rmi.RemoteException;
 
 public interface XmlDataManager extends Remote {
-    int salaryAverage();
-    int salaryAverage(String departmentName);
-    void setJobTitle(Employee employee, JobTitlesEnum newJobTitle);
-    void setSalary(Employee employee, int newSalary);
-    void fireEmployee(Employee employee);
-    void add(Department department) throws AlreadyAddedException;
+    int salaryAverage() throws RemoteException;
+    int salaryAverage(String departmentName) throws RemoteException;
+    void setJobTitle(Employee employee, JobTitlesEnum newJobTitle) throws RemoteException;
+    void setSalary(Employee employee, int newSalary) throws RemoteException;
+    void fireEmployee(Employee employee) throws RemoteException;
+    void add(Department department) throws AlreadyAddedException, RemoteException;
 }

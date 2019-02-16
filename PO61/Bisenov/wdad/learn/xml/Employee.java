@@ -2,13 +2,14 @@ package PO61.Bisenov.wdad.learn.xml;
 
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @XmlRootElement(name = "employee")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(propOrder = {"firstName","secondName","hireDate","salary","jobTitle"})
 
-public class Employee {
+public class Employee implements Serializable {
     private String firstName, secondName;
     @XmlJavaTypeAdapter(LocalDateAdapter.class)
     private LocalDate hireDate;

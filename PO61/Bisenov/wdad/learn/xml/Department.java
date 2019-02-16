@@ -1,13 +1,14 @@
 package PO61.Bisenov.wdad.learn.xml;
 
 import javax.xml.bind.annotation.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 @XmlRootElement(name = "department")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(propOrder = {"name", "employees"})
 
-public class Department {
+public class Department implements Serializable {
     private String name;
 
     @XmlElement(name = "employee")

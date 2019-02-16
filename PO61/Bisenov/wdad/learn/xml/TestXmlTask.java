@@ -17,7 +17,7 @@ public class TestXmlTask {
         organization.add(firstDep);
         organization.add(secondDep);
 
-        XmlTask xmlTask = new XmlTask(organization);
+        XmlTask xmlTask = new XmlTask();
         System.out.println(xmlTask.salaryAverage());
         System.out.println(xmlTask.salaryAverage("Software"));
 //        xmlTask.setSalary("Pasha", "Bastrikov", 55000);
