@@ -30,6 +30,7 @@ public class XmlTask {
         } catch (JAXBException ex){
             ex.printStackTrace();
         }
+
     }
 
     public Object loadObjFromXml(String filepath, Class c){
@@ -45,7 +46,23 @@ public class XmlTask {
             ex.printStackTrace();
         }
         return obj;
+
     }
+
+    public Object loadObjFromXml(String filepath, Class c) {
+        Object obj = null;
+        try {
+            StringReader sr = new StringReader(new String(Files.readAllBytes(Paths.get(filepath))));
+            JAXBContext context = JAXBContext.newInstance(c);
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+
+            obj = unmarshaller.unmarshal(sr);
+        } catch (IOException | JAXBException ex){
+            ex.printStackTrace();
+        }
+        return obj;
+    }
+
 
     public int salaryAverage(){
         return organization.salaryAverage();
@@ -54,6 +71,7 @@ public class XmlTask {
     public int salaryAverage(String departmentName){
         return organization.salaryAverage(departmentName);
     }
+
 
     public void setJobTitle(Employee employee, JobTitlesEnum newJobTitle){
         organization.setJobTitle(employee.getFirstName(), employee.getSecondName(), newJobTitle);
@@ -70,10 +88,12 @@ public class XmlTask {
         writeXML();
     }
 
+
     public void add(Department department) throws AlreadyAddedException{
         if (organization.contains(department)){
             throw new AlreadyAddedException("Department is already added");
         }
         organization.add(department);
+        writeXML();
     }
 }

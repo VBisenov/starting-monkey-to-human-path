@@ -5,14 +5,14 @@
         <employee>
             <firstName>Pasha</firstName>
             <secondName>Bastrikov</secondName>
-            <hireDate>2019-02-03</hireDate>
+            <hireDate>2019-02-01</hireDate>
             <salary>55000</salary>
             <jobTitle>ASSISTANT</jobTitle>
         </employee>
         <employee>
             <firstName>Vova</firstName>
             <secondName>Bisenov</secondName>
-            <hireDate>2019-02-03</hireDate>
+            <hireDate>2019-02-01</hireDate>
             <salary>80000</salary>
             <jobTitle>ENGINEER</jobTitle>
         </employee>
@@ -22,7 +22,7 @@
         <employee>
             <firstName>Egor</firstName>
             <secondName>Arutov</secondName>
-            <hireDate>2019-02-03</hireDate>
+            <hireDate>2019-02-01</hireDate>
             <salary>50000</salary>
             <jobTitle>HEAD</jobTitle>
         </employee>

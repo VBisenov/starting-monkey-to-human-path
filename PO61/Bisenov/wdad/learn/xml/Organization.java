@@ -4,10 +4,11 @@ import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-@XmlRootElement
+@XmlRootElement(namespace = "C:\\Users\\Владимир\\Desktop\\Учёба\\3 курс\\Java\\starting-monkey-to-human-path\\src\\PO61\\Bisenov\\wdad\\learn\\xml\\organization.xml")
 @XmlAccessorType(XmlAccessType.FIELD)
 //@XmlType(propOrder = {"name", "departments"})
 public class Organization implements Serializable {
+
     private String name;
 
     @XmlElement(name = "department")
