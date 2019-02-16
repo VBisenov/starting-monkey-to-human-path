@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<ns2:organization xmlns:ns2="C:\Users\Владимир\Desktop\Учёба\3 курс\Java\starting-monkey-to-human-path\src\PO61\Bisenov\wdad\learn\xml\organization.xml">
-    <name>Apple</name>
+<organization>
     <department>
         <name>Software</name>
         <employee>
@@ -28,4 +27,14 @@
             <jobTitle>HEAD</jobTitle>
         </employee>
     </department>
-</ns2:organization>
+    <department>
+        <name>Security</name>
+        <employee>
+            <firstName>Artem</firstName>
+            <secondName>Filimonov</secondName>
+            <hireDate>2019-02-16</hireDate>
+            <salary>35000</salary>
+            <jobTitle>ASSISTANT</jobTitle>
+        </employee>
+    </department>
+</organization>

@@ -3,14 +3,14 @@
         <server>
             <registry>
                 <createregistry>yes</createregistry>
-                <registryaddress>localhost</registryaddress>
-                <registryport>1099</registryport>
+                <registryaddress>125.0.0.1</registryaddress>
+                <registryport>1003</registryport>
             </registry>
-        </server>
+        <bindedObject class="src\PO61\Bisenov\wdad\data\managers\XmlDataManager.java" name="XmlDataManager"/><bindedObject class="src\PO61\Bisenov\wdad\data\managers\XmlDataManager.java" name="XmlDataManager"/><bindedObject class="src\PO61\Bisenov\wdad\data\managers\XmlDataManager.java" name="XmlDataManager"/></server>
         <client>
             <policypath>client.policy</policypath>
-            <usecodebaseonly>no</usecodebaseonly>
+            <usecodebaseonly>yes</usecodebaseonly>
         </client>
-        <classprovider>http://www.yourhost.free.ru/cp/cp.jar</classprovider>
+        <classprovider/>
     </rmi>
 </appconfig>
