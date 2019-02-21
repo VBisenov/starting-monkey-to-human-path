@@ -3,7 +3,7 @@ package PO61.Bisenov.wdad.learn.xml;
 import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 
-@XmlRootElement(namespace = "C:\\Users\\Владимир\\Desktop\\Учёба\\3 курс\\Java\\starting-monkey-to-human-path\\src\\PO61\\Bisenov\\wdad\\learn\\xml\\organization.xml")
+@XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(propOrder = {"name", "departments"})
 public class Organization {
@@ -85,5 +85,14 @@ public class Organization {
                 department.remove(firstName,secondName);
             }
         }
+    }
+
+    public boolean contains(Department department){
+        for (Department dep: departments){
+            if (dep.equals(department)){
+                return true;
+            }
+        }
+        return false;
     }
 }
