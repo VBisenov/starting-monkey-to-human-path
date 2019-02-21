@@ -9,7 +9,8 @@ import java.time.LocalDate;
 @XmlType(propOrder = {"firstName","secondName","hireDate","salary","jobTitle"})
 
 public class Employee {
-    private String firstName, secondName;
+    private String firstName;
+    private String secondName;
     @XmlJavaTypeAdapter(LocalDateAdapter.class)
     private LocalDate hireDate;
     private int salary;
