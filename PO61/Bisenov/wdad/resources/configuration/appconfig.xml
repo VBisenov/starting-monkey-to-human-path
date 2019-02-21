@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><appconfig>
+    <rmi>
+        <server>
+            <registry>
+                <createregistry>yes</createregistry>
+                <registryaddress>125.0.0.1</registryaddress>
+                <registryport>1003</registryport>
+            </registry>
+        <bindedObject class="src\PO61\Bisenov\wdad\data\managers\XmlDataManager.java" name="XmlDataManager"/><bindedObject class="src\PO61\Bisenov\wdad\data\managers\XmlDataManager.java" name="XmlDataManager"/><bindedObject class="src\PO61\Bisenov\wdad\data\managers\XmlDataManager.java" name="XmlDataManager"/></server>
+        <client>
+            <policypath>client.policy</policypath>
+            <usecodebaseonly>yes</usecodebaseonly>
+        </client>
+        <classprovider/>
+    </rmi>
+</appconfig>
