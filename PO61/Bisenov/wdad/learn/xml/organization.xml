@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<ns2:organization xmlns:ns2="C:\Users\Владимир\Desktop\Учёба\3 курс\Java\starting-monkey-to-human-path\src\PO61\Bisenov\wdad\learn\xml\organization.xml">
+<organization>
     <name>Apple</name>
     <department>
         <name>Software</name>
@@ -28,4 +28,4 @@
             <jobTitle>HEAD</jobTitle>
         </employee>
     </department>
-</ns2:organization>
+</organization>
