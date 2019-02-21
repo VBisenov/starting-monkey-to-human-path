@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <organization>
+    <name>Apple</name>
     <department>
         <name>Software</name>
         <employee>
@@ -25,16 +26,6 @@
             <hireDate>2019-02-01</hireDate>
             <salary>50000</salary>
             <jobTitle>HEAD</jobTitle>
-        </employee>
-    </department>
-    <department>
-        <name>Security</name>
-        <employee>
-            <firstName>Artem</firstName>
-            <secondName>Filimonov</secondName>
-            <hireDate>2019-02-16</hireDate>
-            <salary>35000</salary>
-            <jobTitle>ASSISTANT</jobTitle>
         </employee>
     </department>
 </organization>
