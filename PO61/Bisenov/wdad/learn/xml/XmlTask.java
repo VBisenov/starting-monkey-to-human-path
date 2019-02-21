@@ -30,6 +30,23 @@ public class XmlTask {
         } catch (JAXBException ex){
             ex.printStackTrace();
         }
+
+    }
+
+    public Object loadObjFromXml(String filepath, Class c){
+        Object obj = null;
+        try{
+            StringReader sr = new StringReader(new String(Files.readAllBytes(Paths.get(filepath))));
+            JAXBContext context = JAXBContext.newInstance(c);
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+
+            obj = unmarshaller.unmarshal(sr);
+        }
+        catch (IOException | JAXBException ex) {
+            ex.printStackTrace();
+        }
+        return obj;
+
     }
 
     public Object loadObjFromXml(String filepath, Class c) {
@@ -55,20 +72,22 @@ public class XmlTask {
         return organization.salaryAverage(departmentName);
     }
 
-    public void setJobTitle(String firstName, String secondName, JobTitlesEnum newJobTitle){
-        organization.setJobTitle(firstName, secondName, newJobTitle);
+
+    public void setJobTitle(Employee employee, JobTitlesEnum newJobTitle){
+        organization.setJobTitle(employee.getFirstName(), employee.getSecondName(), newJobTitle);
         writeXML();
     }
 
-    public void setSalary(String firstName, String secondName, int newSalary){
-        organization.setSalary(firstName, secondName, newSalary);
+    public void setSalary(Employee employee, int newSalary){
+        organization.setSalary(employee.getFirstName(), employee.getSecondName(), newSalary);
         writeXML();
     }
 
-    public void fireEmployee(String firstName, String secondName){
-        organization.fireEmployee(firstName, secondName);
+    public void fireEmployee(Employee employee){
+        organization.fireEmployee(employee.getFirstName(), employee.getSecondName());
         writeXML();
     }
+
 
     public void add(Department department) throws AlreadyAddedException{
         if (organization.contains(department)){
