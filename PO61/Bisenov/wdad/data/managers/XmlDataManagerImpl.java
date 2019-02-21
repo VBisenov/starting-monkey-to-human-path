@@ -4,9 +4,7 @@ import PO61.Bisenov.wdad.learn.xml.*;
 
 public class XmlDataManagerImpl implements XmlDataManager{
     private XmlTask xmlTask;
-    /*
-    нужно создать объект XmlTask и через него реализовать эти методы
-     */
+
     public XmlDataManagerImpl(){
         xmlTask = new XmlTask();
     }
