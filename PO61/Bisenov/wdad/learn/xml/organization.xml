@@ -27,14 +27,4 @@
             <jobTitle>HEAD</jobTitle>
         </employee>
     </department>
-    <department>
-        <name>Security</name>
-        <employee>
-            <firstName>Artem</firstName>
-            <secondName>Filimonov</secondName>
-            <hireDate>2019-02-16</hireDate>
-            <salary>35000</salary>
-            <jobTitle>ASSISTANT</jobTitle>
-        </employee>
-    </department>
 </organization>
