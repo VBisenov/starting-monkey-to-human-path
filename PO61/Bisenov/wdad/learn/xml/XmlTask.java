@@ -5,10 +5,6 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
-import java.io.IOException;
-import java.io.StringReader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 public class XmlTask {
 
@@ -36,33 +32,18 @@ public class XmlTask {
     public Object loadObjFromXml(String filepath, Class c){
         Object obj = null;
         try{
-            StringReader sr = new StringReader(new String(Files.readAllBytes(Paths.get(filepath))));
+            File file = new File(filepath);
             JAXBContext context = JAXBContext.newInstance(c);
             Unmarshaller unmarshaller = context.createUnmarshaller();
 
-            obj = unmarshaller.unmarshal(sr);
+            obj = unmarshaller.unmarshal(file);
         }
-        catch (IOException | JAXBException ex) {
+        catch (JAXBException ex) {
             ex.printStackTrace();
         }
         return obj;
 
     }
-
-    public Object loadObjFromXml(String filepath, Class c) {
-        Object obj = null;
-        try {
-            StringReader sr = new StringReader(new String(Files.readAllBytes(Paths.get(filepath))));
-            JAXBContext context = JAXBContext.newInstance(c);
-            Unmarshaller unmarshaller = context.createUnmarshaller();
-
-            obj = unmarshaller.unmarshal(sr);
-        } catch (IOException | JAXBException ex){
-            ex.printStackTrace();
-        }
-        return obj;
-    }
-
 
     public int salaryAverage(){
         return organization.salaryAverage();

@@ -6,6 +6,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
@@ -34,7 +35,11 @@ public class PreferencesManager {
 
     private void saveXML(){
         try{
-            TransformerFactory.newInstance().newTransformer().transform(new DOMSource(document), new StreamResult(new File(XML_PATH)));
+            TransformerFactory transformFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformFactory.newTransformer();
+            DOMSource domSource = new DOMSource(document);
+            StreamResult streamResult = new StreamResult(new File(XML_PATH));
+            transformer.transform(domSource, streamResult);
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -106,36 +111,38 @@ public class PreferencesManager {
         return document.getElementsByTagName("classprovider").item(0).getTextContent();
     }
 
-
-    public String getNameOfElement(String key){
-        String[] strings = key.split("[.]");
-        return strings[strings.length-1];
+    private String getName(String key){
+        String[] s = key.split("[.]");
+        return s[s.length-1];
     }
 
     public void setProperty(String key, String value){
-        document.getElementsByTagName(getNameOfElement(key)).item(0).setTextContent(value);
-        saveXML();
+        document.getElementsByTagName(getName(key)).item(0).setTextContent(value);
     }
 
     public String getProperty(String key){
-       return document.getElementsByTagName(getNameOfElement(key)).item(0).getTextContent();
+        return document.getElementsByTagName(getName(key)).item(0).getTextContent();
     }
 
     public void setProperties(Properties prop){
-        prop.stringPropertyNames().forEach(s -> setProperty(s,prop.getProperty(s)));
-    }
-
-    public Properties getProperties(){
-        Properties properties = new Properties();
-        String[] keys = {PreferencesManagerConstants.classprovider,PreferencesManagerConstants.createregistry,
-                PreferencesManagerConstants.policypath, PreferencesManagerConstants.registryaddress,
-                PreferencesManagerConstants.usecodebaseonly, PreferencesManagerConstants.registryport};
-        for(String s : keys){
-            properties.setProperty(s,document.getElementsByTagName(getNameOfElement(s)).item(0).getTextContent());
+        String[] keys = {PreferencesManagerConstants.registryaddress, PreferencesManagerConstants.createregistry,
+                PreferencesManagerConstants.registryport, PreferencesManagerConstants.policypath,
+                PreferencesManagerConstants.usecodebaseonly, PreferencesManagerConstants.classprovider};
+        for (String s: keys){
+            prop.setProperty(s, prop.getProperty(s));
         }
-        return properties;
     }
 
+    public Properties getProperties() {
+        Properties prop = new Properties();
+        String[] keys = {PreferencesManagerConstants.registryaddress, PreferencesManagerConstants.createregistry,
+                PreferencesManagerConstants.registryport, PreferencesManagerConstants.policypath,
+                PreferencesManagerConstants.usecodebaseonly, PreferencesManagerConstants.classprovider};
+        for (String s: keys){
+            prop.setProperty(s, document.getElementsByTagName(getName(s)).item(0).getTextContent());
+        }
+        return prop;
+    }
 
     public void addBindedObject(String name, String className){
         Element element = document.createElement("bindedObject");
@@ -144,13 +151,13 @@ public class PreferencesManager {
         document.getElementsByTagName("server").item(0).appendChild(element);
         saveXML();
     }
+
     public void removeBindedObject(String name){
-        NodeList list = document.getElementsByTagName("bindedBoject");
-        Element element;
+        NodeList list = document.getElementsByTagName("bindedObject");
         for (int i = 0; i < list.getLength(); i++) {
-            element = (Element) list.item(i);
-            if (element.getAttribute("name").equals(name)){
-                element.getParentNode().removeChild(element);
+            Element el = (Element) list.item(i);
+            if (el.getAttribute("name").equals(name)){
+                el.getParentNode().removeChild(el);
             }
         }
         saveXML();
