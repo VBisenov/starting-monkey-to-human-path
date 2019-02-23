@@ -15,7 +15,7 @@ import java.util.Properties;
 
 public class PreferencesManager {
     private static PreferencesManager instance;
-    public static final String XML_PATH = "src\\PO61\\Bisenov\\wdad\\resources\\configuration\\appconfig.xml" ;
+    private static final String XML_PATH = "src\\PO61\\Bisenov\\wdad\\resources\\configuration\\appconfig.xml" ;
     private Document document;
 
     private PreferencesManager(){
