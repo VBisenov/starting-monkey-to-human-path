@@ -90,8 +90,8 @@ public class Organization implements Serializable {
     }
 
     public boolean contains(Department department){
-        for (Department d: departments){
-            if (d.equals(department)){
+        for (Department dep: departments){
+            if (dep.equals(department)){
                 return true;
             }
         }
