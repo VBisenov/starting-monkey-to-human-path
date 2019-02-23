@@ -3,10 +3,11 @@
         <server>
             <registry>
                 <createregistry>yes</createregistry>
-                <registryaddress>125.0.0.1</registryaddress>
+                <registryaddress>localhost</registryaddress>
                 <registryport>1003</registryport>
             </registry>
-         <client>
+        <bindedObject class="src\PO61\Bisenov\wdad\data\managers\XmlDataManager.java" name="XmlDataManager"/><bindedObject class="src\PO61\Bisenov\wdad\data\managers\XmlDataManager.java" name="XmlDataManager"/><bindedObject class="src\PO61\Bisenov\wdad\data\managers\XmlDataManager.java" name="XmlDataManager"/></server>
+        <client>
             <policypath>client.policy</policypath>
             <usecodebaseonly>yes</usecodebaseonly>
         </client>

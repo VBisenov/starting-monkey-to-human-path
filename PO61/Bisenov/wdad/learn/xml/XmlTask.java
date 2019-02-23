@@ -54,18 +54,18 @@ public class XmlTask {
     }
 
 
-    public void setJobTitle(Employee employee, JobTitlesEnum newJobTitle){
-        organization.setJobTitle(employee.getFirstName(), employee.getSecondName(), newJobTitle);
+    public void setJobTitle(String firstName, String secondName, JobTitlesEnum newJobTitle){
+        organization.setJobTitle(firstName, secondName, newJobTitle);
         writeXML();
     }
 
-    public void setSalary(Employee employee, int newSalary){
-        organization.setSalary(employee.getFirstName(), employee.getSecondName(), newSalary);
+    public void setSalary(String firstName, String secondName, int newSalary){
+        organization.setSalary(firstName, secondName, newSalary);
         writeXML();
     }
 
-    public void fireEmployee(Employee employee){
-        organization.fireEmployee(employee.getFirstName(), employee.getSecondName());
+    public void fireEmployee(String firstName, String secondName){
+        organization.fireEmployee(firstName, secondName);
         writeXML();
     }
 
@@ -77,4 +77,5 @@ public class XmlTask {
         organization.add(department);
         writeXML();
     }
+
 }

@@ -64,7 +64,8 @@ public class Employee implements Serializable {
     public boolean equals(Object obj) {
         Employee emp = (Employee) obj;
 
-        return emp.getFirstName().equals(firstName) && emp.getSecondName().equals(secondName) && emp.getHireDate().equals(hireDate)
+        return emp.getFirstName().equals(firstName) && emp.getSecondName().equals(secondName)
+                && emp.getHireDate().equals(hireDate)
                 && emp.getSalary() == salary && emp.getJobTitle().equals(jobTitle);
     }
 }

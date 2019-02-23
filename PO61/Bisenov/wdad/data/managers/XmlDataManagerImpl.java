@@ -20,18 +20,18 @@ public class XmlDataManagerImpl implements XmlDataManager{
     }
 
     @Override
-    public void setJobTitle(Employee employee, JobTitlesEnum newJobTitle) {
-        xmlTask.setJobTitle(employee, newJobTitle);
+    public void setJobTitle(String firstName, String secondName, JobTitlesEnum newJobTitle) {
+        xmlTask.setJobTitle(firstName, secondName, newJobTitle);
     }
 
     @Override
-    public void setSalary(Employee employee, int newSalary) {
-        xmlTask.setSalary(employee, newSalary);
+    public void setSalary(String firstName, String secondName, int newSalary) {
+        xmlTask.setSalary(firstName, secondName, newSalary);
     }
 
     @Override
-    public void fireEmployee(Employee employee) {
-        xmlTask.fireEmployee(employee);
+    public void fireEmployee(String firstName, String secondName) {
+        xmlTask.fireEmployee(firstName, secondName);
     }
 
     @Override

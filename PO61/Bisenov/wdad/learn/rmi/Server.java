@@ -6,41 +6,34 @@ import PO61.Bisenov.wdad.data.managers.XmlDataManagerImpl;
 import PO61.Bisenov.wdad.utils.PreferencesManagerConstants;
 
 import java.rmi.AlreadyBoundException;
-import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
 public class Server {
-    static private String createregistry;
-    static  private String registryaddress;
-    static private int registryport;
-
+    private static int registryPort;
+    private static String createRegistry;
+    private static String registryAddress;
     public static void main(String[] args) {
-        PreferencesManager pm = PreferencesManager.getInstance();
-        createregistry = pm.getProperty(PreferencesManagerConstants.createregistry);
-        registryaddress = pm.getProperty(PreferencesManagerConstants.registryaddress);
-        registryport = Integer.parseInt(pm.getProperty(PreferencesManagerConstants.registryport));
-        Registry registry = null;
-
+        PreferencesManager manager = PreferencesManager.getInstance();
+        registryPort = Integer.parseInt(manager.getProperty(PreferencesManagerConstants.registryport));
+        createRegistry = manager.getProperty(PreferencesManagerConstants.createregistry);
+        registryAddress = manager.getProperty(PreferencesManagerConstants.registryaddress);
         try {
-            if (createregistry.equals("yes")) {
-                System.out.print("Create registry...");
-                registry = LocateRegistry.createRegistry(registryport);
-                System.out.println(" OK");
+            XmlDataManager obj = new XmlDataManagerImpl();
+            XmlDataManager stub = (XmlDataManager) UnicastRemoteObject.exportObject(obj, 0);
+            Registry registry;
+            System.out.print("Create registry...");
+            if (createRegistry.equals("yes")) {
+                registry = LocateRegistry.createRegistry(registryPort);
+            } else {
+                registry = LocateRegistry.getRegistry(registryPort);
             }
-
-
-            if (registry != null) {
-                System.out.print("Exporting object...");
-                final XmlDataManager manager = new XmlDataManagerImpl();
-                Remote stub = UnicastRemoteObject.exportObject(manager, 0);
-                registry.bind("XmlDataManager", stub);
-                System.out.println(" OK");
-            }
-            pm.addBindedObject("XmlDataManager", "src\\PO61\\Bisenov\\wdad\\data\\managers\\XmlDataManager.java");
-
+            System.out.println(" OK");
+            System.out.print("Export object...");
+            registry.bind("Organization", stub);
+            System.out.println(" OK");
         } catch (RemoteException | AlreadyBoundException ex){
             ex.printStackTrace();
         }

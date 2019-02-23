@@ -84,7 +84,7 @@ public class Organization implements Serializable {
     public void fireEmployee(String firstName, String secondName){
         for (Department department: departments){
             if (department.isExist(firstName, secondName)){
-                department.remove(firstName,secondName);
+                 department.remove(firstName,secondName);
             }
         }
     }
@@ -96,5 +96,14 @@ public class Organization implements Serializable {
             }
         }
         return false;
+    }
+
+    public void addEmployee(String firstName, String secondName, JobTitlesEnum jobTitle, int salary, String departmentName){
+        Employee employee = new Employee(firstName, secondName, salary, jobTitle);
+        for (Department d: departments){
+            if (d.getName().equals(departmentName)){
+                d.add(employee);
+            }
+        }
     }
 }
