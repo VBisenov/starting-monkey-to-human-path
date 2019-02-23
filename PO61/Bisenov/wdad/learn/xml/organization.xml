@@ -23,8 +23,11 @@
             <firstName>Egor</firstName>
             <secondName>Arutov</secondName>
             <hireDate>2019-02-01</hireDate>
-            <salary>50000</salary>
-            <jobTitle>HEAD</jobTitle>
+            <salary>40000</salary>
+            <jobTitle>MANAGER</jobTitle>
         </employee>
+    </department>
+    <department>
+        <name>Design</name>
     </department>
 </organization>

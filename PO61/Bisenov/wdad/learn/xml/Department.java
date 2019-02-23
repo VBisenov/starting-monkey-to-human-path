@@ -70,11 +70,16 @@ public class Department implements Serializable {
     }
 
     public void remove(String firstName, String secondName){
-        for (Employee employee: employees){
-            if (employee.getFirstName().equals(firstName) && employee.getSecondName().equals(secondName)){
-                employees.remove(employee);
+        for (int i = 0; i < employees.size(); i++) {
+            if (employees.get(i).getFirstName().equals(firstName) && employees.get(i).getSecondName().equals(secondName)){
+                employees.remove(employees.get(i));
             }
         }
+//        for (Employee employee: employees){
+//            if (employee.getFirstName().equals(firstName) && employee.getSecondName().equals(secondName)){
+//                employees.remove(employee);
+//            }
+//        }
     }
 
     @Override
