@@ -30,7 +30,7 @@ public class Organization implements Serializable {
         return name;
     }
 
-    public ArrayList<Department> getDepartments() {
+    public ArrayList<Department> getListOfDepartments() {
         return departments;
     }
 
@@ -51,7 +51,7 @@ public class Organization implements Serializable {
     public int salaryAverage(){
         int count = 0;
         for (Department department: departments){
-            count += department.getEmployees().size();
+            count += department.getListOfEmployees().size();
         }
         return resultSalary() / count;
     }
@@ -67,7 +67,7 @@ public class Organization implements Serializable {
 
     public void setJobTitle(String firstName, String secondName, JobTitlesEnum newJobTitle){
         for (Department department: departments){
-            if (department.isExist(firstName, secondName)) {
+            if (department.isContains(firstName, secondName)) {
                 department.getEmployee(firstName, secondName).setJobTitle(newJobTitle);
             }
         }
@@ -75,7 +75,7 @@ public class Organization implements Serializable {
 
     public void setSalary(String firstName, String secondName, int newSalary){
         for (Department department: departments){
-            if (department.isExist(firstName, secondName)){
+            if (department.isContains(firstName, secondName)){
                 department.getEmployee(firstName, secondName).setSalary(newSalary);
             }
         }
@@ -83,7 +83,7 @@ public class Organization implements Serializable {
 
     public void fireEmployee(String firstName, String secondName){
         for (Department department: departments){
-            if (department.isExist(firstName, secondName)){
+            if (department.isContains(firstName, secondName)){
                  department.remove(firstName,secondName);
             }
         }
