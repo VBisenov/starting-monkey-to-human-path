@@ -11,11 +11,11 @@ public class XmlTask {
     private Organization organization;
 
     public XmlTask(){
-        this.organization = (Organization) loadObjFromXml("src\\PO61\\Bisenov\\wdad\\learn\\xml\\organization.xml", Organization.class);
+        this.organization = (Organization) loadObjFromXml("src\\main\\java\\PO61\\Bisenov\\wdad\\learn\\xml\\organization.xml", Organization.class);
     }
 
     private void writeXML(){
-        File file = new File("src\\PO61\\Bisenov\\wdad\\learn\\xml\\organization.xml");
+        File file = new File("src\\main\\java\\PO61\\Bisenov\\wdad\\learn\\xml\\organization.xml");
         try {
             JAXBContext context = JAXBContext.newInstance(Organization.class);
 

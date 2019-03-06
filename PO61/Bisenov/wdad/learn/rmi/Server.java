@@ -21,8 +21,6 @@ public class Server {
         createRegistry = manager.getProperty(PreferencesManagerConstants.createregistry);
         registryAddress = manager.getProperty(PreferencesManagerConstants.registryaddress);
         try {
-            XmlDataManager obj = new XmlDataManagerImpl();
-            XmlDataManager stub = (XmlDataManager) UnicastRemoteObject.exportObject(obj, 0);
             Registry registry;
             System.out.print("Create registry...");
             if (createRegistry.equals("yes")) {
@@ -32,10 +30,21 @@ public class Server {
             }
             System.out.println(" OK");
             System.out.print("Export object...");
-            registry.bind("Organization", stub);
+            registry.bind("Organization", getStub());
             System.out.println(" OK");
         } catch (RemoteException | AlreadyBoundException ex){
             ex.printStackTrace();
         }
+    }
+
+    public static XmlDataManager getStub(){
+        XmlDataManager stub = null;
+        try {
+            XmlDataManager obj = new XmlDataManagerImpl();
+            stub = (XmlDataManager) UnicastRemoteObject.exportObject(obj, 0);
+        } catch (RemoteException ex){
+            ex.getMessage();
+        }
+        return stub;
     }
 }

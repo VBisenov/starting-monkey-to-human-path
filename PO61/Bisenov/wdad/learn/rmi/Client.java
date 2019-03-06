@@ -15,22 +15,24 @@ import java.rmi.registry.Registry;
 public class Client {
     private static int registryPort;
     private static String registryAddress;
+
     public static void main(String[] args) {
         PreferencesManager manager = PreferencesManager.getInstance();
         registryPort = Integer.parseInt(manager.getProperty(PreferencesManagerConstants.registryport));
         registryAddress = PreferencesManagerConstants.registryaddress;
+        Registry registry = null;
         try {
             System.out.print("Connecting to registry...");
-            Registry registry = LocateRegistry.getRegistry(registryPort);
+            registry = LocateRegistry.getRegistry(registryPort);
             System.out.println(" OK");
             XmlDataManager object = (XmlDataManager) registry.lookup("Organization");
             System.out.println(object.salaryAverage());
 //            object.fireEmployee("Egor", "Arutov");
-            object.setJobTitle("Egor", "Arutov", JobTitlesEnum.MANAGER);
-            object.setSalary("Egor", "Arutov", 40000);
+            object.setJobTitle("Egor", "Arutov", JobTitlesEnum.ENGINEER);
+            object.setSalary("Egor", "Arutov", 45000);
             Department department = new Department("Design");
             object.add(department);
-        } catch (RemoteException | NotBoundException | AlreadyAddedException ex){
+        } catch (RemoteException | NotBoundException | AlreadyAddedException ex) {
             ex.getMessage();
         }
     }
