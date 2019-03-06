@@ -31,7 +31,7 @@ public class Department implements Serializable {
         return name;
     }
 
-    public ArrayList<Employee> getEmployees() {
+    public ArrayList<Employee> getListOfEmployees() {
         return employees;
     }
 
@@ -51,7 +51,7 @@ public class Department implements Serializable {
         return resultSalary()/this.employees.size();
     }
 
-    public boolean isExist(String firstName, String secondName){
+    public boolean isContains(String firstName, String secondName){
         for (Employee employee: employees){
             if (employee.getFirstName().equals(firstName) && employee.getSecondName().equals(secondName)){
                 return true;
@@ -85,6 +85,6 @@ public class Department implements Serializable {
     @Override
     public boolean equals(Object obj) {
         Department  department = (Department) obj;
-        return department.getName().equals(getName()) && department.getEmployees().equals(getEmployees());
+        return department.getName().equals(getName()) && department.getListOfEmployees().equals(getListOfEmployees());
     }
 }
