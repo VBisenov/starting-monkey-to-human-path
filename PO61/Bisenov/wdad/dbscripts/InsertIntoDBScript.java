@@ -17,7 +17,7 @@ public class InsertIntoDBScript {
             DriverManager.registerDriver(new Driver());
             Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);
             Statement statement = connection.createStatement();
-            
+
             String[] jbRows = {"id", "name"};
             String[] jbValues = {"1", "manager"};
             insertData("jobtitles",jbRows, jbValues, statement);
@@ -32,6 +32,8 @@ public class InsertIntoDBScript {
             ex.printStackTrace();
         }
     }
+
+
     private static void insertData(String tableName, String rows[], String values[], Statement statement) throws SQLException{
         String resultRowsString, resultValuesString;
 
@@ -45,7 +47,9 @@ public class InsertIntoDBScript {
         for (String string: values){
             resultValuesSet.append(string).append(", ");
         }
+        System.out.println("Insert data in database...");
         resultValuesString = resultRowsSet.substring(0, resultRowsSet.length()-2); // removes the last comma from the value
-       statement.executeUpdate("INSERT INTO "+tableName+"("+resultRowsString+")"+"VALUES"+"("+resultValuesString+")");
+        statement.executeUpdate("INSERT INTO "+tableName+"("+resultRowsString+")"+"VALUES"+"("+resultValuesString+")");
+        System.out.println(" OK");
     }
 }

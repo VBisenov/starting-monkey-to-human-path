@@ -19,7 +19,7 @@ public class CreateDBScript {
             statement = connection.createStatement();
 
             System.out.print("Creating DataBase...");
-            statement.executeUpdate("drop database "+dbName); //todo delete this line
+            statement.executeUpdate("drop database if exists "+dbName); //todo delete this line
             createDataBase(dbName, statement);
             System.out.println(" OK");
 
