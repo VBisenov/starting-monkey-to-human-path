@@ -21,6 +21,12 @@ public class CreateDBScript {
         String[] jtRows = {"id integer(10)", "name varchar(100)"};
         createTable(statement,"jobtitles", jtRows);
 
+        createPrimaryKey(statement, "employees", "id");
+        createPrimaryKey(statement, "departments", "id");
+        createPrimaryKey(statement, "jobtitles", "id");
+
+        createForeignKey(statement, "employees", "departments_id", "departments", "id");
+        createForeignKey(statement, "employees", "jobtitles_id", "jobtitles", "id");
     }
 
 
@@ -45,6 +51,26 @@ public class CreateDBScript {
             System.out.print("Create table '"+name+"' in database '"+DB_NAME+"'...");
             statement.executeUpdate("CREATE TABLE "+name+" ("+resultStringRows+")");
             System.out.println(" OK");
+        } catch (SQLException ex){
+            ex.printStackTrace();
+        }
+    }
+
+    
+    private static void createForeignKey(Statement statement, String tableName, String columnName, String foreignTable, String foreignColumn){
+        try {
+           // String query = "ALTER TABLE "+tableName+" ADD FOREIGN KEY ("+columnName+") REFERENCES "+foreignTable+" ("+foreignColumn+");";
+            String query = "ALTER TABLE employees ADD FOREIGN KEY (departments_id) REFERENCES departments (id)";
+            statement.execute(query);
+        } catch (SQLException ex){
+            ex.printStackTrace();
+        }
+    }
+
+    private static void createPrimaryKey(Statement statement, String tableName, String columnName){
+        try{
+            String query = "ALTER TABLE "+tableName+" ADD PRIMARY KEY AUTO_INCREMENT ("+columnName+")";
+            statement.execute(query);
         } catch (SQLException ex){
             ex.printStackTrace();
         }
