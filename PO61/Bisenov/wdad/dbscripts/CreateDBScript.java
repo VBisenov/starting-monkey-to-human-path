@@ -56,11 +56,11 @@ public class CreateDBScript {
         }
     }
 
-    
+
     private static void createForeignKey(Statement statement, String tableName, String columnName, String foreignTable, String foreignColumn){
         try {
-           // String query = "ALTER TABLE "+tableName+" ADD FOREIGN KEY ("+columnName+") REFERENCES "+foreignTable+" ("+foreignColumn+");";
-            String query = "ALTER TABLE employees ADD FOREIGN KEY (departments_id) REFERENCES departments (id)";
+            String query = "ALTER TABLE "+tableName+" ADD FOREIGN KEY ("+columnName+") REFERENCES "+foreignTable+" ("+foreignColumn+");";
+         //   String query = "ALTER TABLE employees ADD FOREIGN KEY (departments_id) REFERENCES departments (id)";
             statement.execute(query);
         } catch (SQLException ex){
             ex.printStackTrace();
