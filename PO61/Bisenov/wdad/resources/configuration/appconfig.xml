@@ -13,4 +13,13 @@
         </client>
         <classprovider/>
     </rmi>
+    <datacource>
+        <classname>JDBC</classname>
+        <dirvertype>MySQL</dirvertype>
+        <hostname>localhost</hostname>
+        <port>3306</port>
+        <DBName>organization</DBName>
+        <user>root</user>
+        <pass>qwerty</pass>
+    </datacource>
 </appconfig>

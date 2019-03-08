@@ -1,8 +1,8 @@
 package PO61.Bisenov.wdad.learn.rmi;
 
 import PO61.Bisenov.wdad.data.managers.PreferencesManager;
-import PO61.Bisenov.wdad.data.managers.XmlDataManager;
-import PO61.Bisenov.wdad.data.managers.XmlDataManagerImpl;
+import PO61.Bisenov.wdad.data.managers.DataManager;
+import PO61.Bisenov.wdad.data.managers.DataManagerImpl;
 import PO61.Bisenov.wdad.utils.PreferencesManagerConstants;
 
 import java.rmi.AlreadyBoundException;
@@ -37,11 +37,11 @@ public class Server {
         }
     }
 
-    public static XmlDataManager getStub(){
-        XmlDataManager stub = null;
+    public static DataManager getStub(){
+        DataManager stub = null;
         try {
-            XmlDataManager obj = new XmlDataManagerImpl();
-            stub = (XmlDataManager) UnicastRemoteObject.exportObject(obj, 0);
+            DataManager obj = new DataManagerImpl();
+            stub = (DataManager) UnicastRemoteObject.exportObject(obj, 0);
         } catch (RemoteException ex){
             ex.getMessage();
         }
