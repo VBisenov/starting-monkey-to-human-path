@@ -2,10 +2,10 @@ package PO61.Bisenov.wdad.data.managers;
 
 import PO61.Bisenov.wdad.learn.xml.*;
 
-public class XmlDataManagerImpl implements XmlDataManager{
+public class DataManagerImpl implements DataManager {
     private XmlTask xmlTask;
 
-    public XmlDataManagerImpl(){
+    public DataManagerImpl(){
         xmlTask = new XmlTask();
     }
 

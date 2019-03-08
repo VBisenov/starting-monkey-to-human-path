@@ -1,7 +1,7 @@
 package PO61.Bisenov.wdad.learn.rmi;
 
 import PO61.Bisenov.wdad.data.managers.PreferencesManager;
-import PO61.Bisenov.wdad.data.managers.XmlDataManager;
+import PO61.Bisenov.wdad.data.managers.DataManager;
 import PO61.Bisenov.wdad.learn.xml.AlreadyAddedException;
 import PO61.Bisenov.wdad.learn.xml.Department;
 import PO61.Bisenov.wdad.learn.xml.JobTitlesEnum;
@@ -25,7 +25,7 @@ public class Client {
             System.out.print("Connecting to registry...");
             registry = LocateRegistry.getRegistry(registryPort);
             System.out.println(" OK");
-            XmlDataManager object = (XmlDataManager) registry.lookup("Organization");
+            DataManager object = (DataManager) registry.lookup("Organization");
             System.out.println(object.salaryAverage());
 //            object.fireEmployee("Egor", "Arutov");
             object.setJobTitle("Egor", "Arutov", JobTitlesEnum.ENGINEER);

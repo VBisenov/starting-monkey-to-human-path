@@ -14,11 +14,11 @@
         <classprovider/>
     </rmi>
     <datacource>
-        <classname></classname>
-        <dirvertype></dirvertype>
+        <classname>JDBC</classname>
+        <dirvertype>MySQL</dirvertype>
         <hostname>localhost</hostname>
-        <port>3066</port>
-        <DBName>MySQL</DBName>
+        <port>3306</port>
+        <DBName>organization</DBName>
         <user>root</user>
         <pass>qwerty</pass>
     </datacource>

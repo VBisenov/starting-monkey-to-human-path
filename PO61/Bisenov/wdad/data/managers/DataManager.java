@@ -7,7 +7,7 @@ import PO61.Bisenov.wdad.learn.xml.JobTitlesEnum;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-public interface XmlDataManager extends Remote {
+public interface DataManager extends Remote {
     int salaryAverage() throws RemoteException;
     int salaryAverage(String departmentName) throws RemoteException;
     void setJobTitle(String firstName, String secondName, JobTitlesEnum newJobTitle) throws RemoteException;

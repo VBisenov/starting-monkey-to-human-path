@@ -1,75 +1,52 @@
 package PO61.Bisenov.wdad.dbscripts;
 
-import com.mysql.jdbc.Driver;
-
-import java.sql.*;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class CreateDBScript {
     private static final String DB_URL = "jdbc:mysql://localhost:3306/";
     private static final String USER = "root";
     private static final String PASS = "qwerty";
-    private static final String dbName = "organization";
+    private static final String DB_NAME = "organization";
 
     public static void main(String[] args) {
-        Connection connection = null;
-        Statement statement = null;
-        try{
-            DriverManager.registerDriver(new Driver());
-            connection = DriverManager.getConnection(DB_URL, USER, PASS);
-            statement = connection.createStatement();
+        Statement statement = Connector.connectionToServer(DB_URL, USER, PASS);
+        createDataBase(DB_NAME ,statement);
+        statement = Connector.connectionToDataBase(DB_URL, DB_NAME, USER, PASS);
+        String[] empRows = {"id integer(10)", "first_name varchar(50)", "second_name varchar(50)", "birth_date date",
+                "hire_date date", "salary numeric(15, 5)", "jobtitles_id integer(10)", "departments_id integer(10)"};
+        createTable(statement, "employees", empRows);
+        String[] depRows = {"id integer(10)", "name varchar(50)", "description varchar(255)"};
+        createTable(statement,"departments", depRows);
+        String[] jtRows = {"id integer(10)", "name varchar(100)"};
+        createTable(statement,"jobtitles", jtRows);
 
-            System.out.print("Creating DataBase...");
-            statement.executeUpdate("drop database if exists "+dbName); //todo delete this line
-            createDataBase(dbName, statement);
+    }
+
+
+    private static void createDataBase(String DBName,Statement statement){
+        try {
+            System.out.print("Create database '"+DBName+"'...");
+            statement.executeUpdate("DROP DATABASE IF EXISTS "+ DBName); //todo delete this line
+            statement.executeUpdate("CREATE DATABASE IF NOT EXISTS " + DBName);
             System.out.println(" OK");
-
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+dbName, USER, PASS); // connecting to
-            statement = connection.createStatement();                                                        // already created DB
-
-            String[] empRows = {"id integer(10)", "first_name varchar(50)", "second_name varchar(50)", "birth_date date",
-                    "hire_date date", "salary numeric(15, 5)", "jobtitles_id integer(10)", "departments_id integer(10)"};
-            createTable("employees", empRows, statement);
-            String[] depRows = {"id integer(10)", "name varchar(50)", "description varchar(255)"};
-            createTable("departments", depRows, statement);
-            String[] jtRows = {"id integer(10)", "name varchar(100)"};
-            createTable("jobtitles", jtRows, statement);
-
         } catch (SQLException ex){
             ex.printStackTrace();
-            System.err.println("DataBase not found");
-        } finally {
-            try {
-                if (statement != null) {
-                    statement.close();
-                }
-            } catch (SQLException ex){
-                ex.printStackTrace();
-            }
-            try {
-                if (connection != null){
-                    connection.close();
-                }
-            } catch (SQLException ex){
-                ex.printStackTrace();
-            }
         }
-    }
-    private static void createTable(String name, String[] rows, Statement statement) throws SQLException{
-        String resultRowsString = null;
-        if (rows == null){
-            System.out.println("You haven't insert rows in the table");
-            return;
-        }
-        StringBuilder resultRowsSet = new StringBuilder();
-        for (String str: rows){
-                resultRowsSet.append(str).append(", ");
-        }
-        resultRowsString = resultRowsSet.substring(0, resultRowsSet.length()-2); // removes the last comma from the rows
-        String query = ("CREATE TABLE "+name+" ("+resultRowsString+")");
-        statement.executeUpdate(query);
     }
 
-    private static void createDataBase(String name, Statement statement) throws SQLException{
-        statement.executeUpdate("CREATE DATABASE IF NOT EXISTS "+name);
+    private static void createTable(Statement statement, String name, String[] rows){
+        StringBuilder sb = new StringBuilder();
+        for (String str: rows){
+                sb.append(str).append(", ");
+        }
+        String resultStringRows = sb.toString().substring(0, sb.toString().length()-2); // delete the last comma
+        try {
+            System.out.print("Create table '"+name+"' in database '"+DB_NAME+"'...");
+            statement.executeUpdate("CREATE TABLE "+name+" ("+resultStringRows+")");
+            System.out.println(" OK");
+        } catch (SQLException ex){
+            ex.printStackTrace();
+        }
     }
 }
