@@ -10,40 +10,58 @@ public class InsertIntoDBScript {
     private static final String DB_NAME = "organization";
 
     public static void main(String[] args) {
+        Statement statement = Connector.connectionToDataBase(DB_URL, DB_NAME, USER, PASS);
+        String[] jobTitlesRows = {"id", "name"};
+        String[] employeesRows = {"id", "first_name", "second_name", "birth_date", "hire_date", "salary", "jobtitles_id", "departments_id"};
+        String[] departmentsRows = {"id", "name", "description"};
+
+        String[] firstJobTitlesValues = {"1", "head"};
+        String[] firstEmployeesValues = {"1", "Vova", "Bisenov", "1999-06-18", "2019-07-23", "20000", "1", "1"};
+        String[] firstDepartmentsValues = {"1", "engineering", "department of engineering"};
+
+        String[] secondJobTitlesValues = {"2", "assistant"};
+        String[] secondEmployeesValues = {"2", "Pasha", "Bastrikov", "1997-12-30", "2019-07-25", "25000", "2", "1"};
+
+        String[] secondDepartmentValues = {"2", "security", "department of security"};
+        String[] thirdEmployeesValues = {"3", "Artur", "Egorov", "1998-01-20", "2019-07-26", "30000", "1", "2"};
+
+        insertIntoTable(statement, "jobtitles", jobTitlesRows, firstJobTitlesValues);
+        insertIntoTable(statement, "jobtitles", jobTitlesRows, secondJobTitlesValues);
+
+        insertIntoTable(statement, "departments", departmentsRows, firstDepartmentsValues);
+        insertIntoTable(statement, "departments", departmentsRows, secondDepartmentValues);
+
+        insertIntoTable(statement, "employees", employeesRows, firstEmployeesValues);
+        insertIntoTable(statement, "employees", employeesRows, secondEmployeesValues);
+        insertIntoTable(statement, "employees", employeesRows, thirdEmployeesValues);
+    }
+
+    private static void insertIntoTable(Statement statement, String tableName, String[] rows, String[] values) {
+        String rowsStringSet = getRowsStringFromStringsArray(rows);
+        String valuesStringSet = getValuesStringFromStringsArray(values);
+        String query = "INSERT INTO " + tableName + " (" + rowsStringSet + ") VALUES" + " (" + valuesStringSet + ") ";
         try {
-            Statement statement = Connector.connectionToDataBase(DB_URL, DB_NAME, USER, PASS);
-            String[] jbRows = {"id", "name"};
-            String[] jbValues = {"1", "manager"};
-            insertData("jobtitles",jbRows, jbValues, statement);
-            String[] empRows = {"id", "first_name", "second_name", "birth_date",
-                    "hire_date", "salary", "jobtitles_id", "departments_id"};
-            String[] empValues = {"1", "Vova", "Bisenov", "1999-06-18", "2019-07-23", "20000", "1", "1"};
-            insertData("employees", empRows, empValues, statement);
-            String[] depRows = {"id", "name", "description"};
-            String[] depValues = {"1", "engineering", "department of engineering"};
-            insertData("departments", depRows, depValues, statement);
-        } catch (SQLException ex){
+            System.out.print("Insert data into table '"+tableName+"'...");
+            statement.executeUpdate(query);
+            System.out.println(" OK");
+        } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }
 
-    private static void insertData(String tableName, String rows[], String values[], Statement statement) throws SQLException{
-        String resultRowsStringSet, resultValuesStringSet;
-
-        StringBuilder resultRowsSet = new StringBuilder();
-        for (String string: rows){
-            resultRowsSet.append(string).append(", ");
+    private static String getRowsStringFromStringsArray(String[] array) {
+        StringBuilder sb = new StringBuilder();
+        for (String str : array) {
+                sb.append(str).append(", ");
         }
-        resultRowsStringSet = resultRowsSet.substring(0, resultRowsSet.length()-2); // removes the last comma from the rows
+        return sb.toString().substring(0, sb.length()-2); //delete last comma
+    }
 
-        StringBuilder resultValuesSet = new StringBuilder();
-        for (String string: values){
-            resultValuesSet.append("'"+string+"'").append(", ");
+    private static String getValuesStringFromStringsArray(String[] array) {
+        StringBuilder sb = new StringBuilder();
+        for (String str : array) {
+            sb.append("'"+str+"'").append(", ");
         }
-        System.out.print("Insert data in database table '"+tableName+"'...");
-        resultValuesStringSet = resultValuesSet.substring(0, resultValuesSet.length()-2); // removes the last comma from the value
-        String query = "INSERT INTO "+tableName+" ( "+resultRowsStringSet+" ) VALUES "+"( "+resultValuesStringSet+" )";
-        statement.executeUpdate(query);
-        System.out.println(" OK");
+        return sb.toString().substring(0, sb.length()-2); //delete last comma
     }
 }
