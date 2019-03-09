@@ -190,12 +190,14 @@ public class JDBCDataManager implements DataManager {
         Statement statement = getStatement();
         int result = 0;
         try {
-            ResultSet rs = getStatement().executeQuery("SELECT MAX(id) FROM departments");
+            ResultSet rs = statement.executeQuery("SELECT MAX(id) FROM departments");
             while (rs.next()){
                 result = rs.getInt(1)+1;
             }
         } catch (SQLException ex){
             ex.printStackTrace();
+        } finally {
+            closeStatement(statement);
         }
         return result;
     }
