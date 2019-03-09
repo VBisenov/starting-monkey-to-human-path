@@ -27,6 +27,12 @@ public class CreateDBScript {
 
         createForeignKey(statement, "employees", "departments_id", "departments", "id");
         createForeignKey(statement, "employees", "jobtitles_id", "jobtitles", "id");
+
+        try {
+            statement.close();
+        } catch (SQLException ex){
+            ex.printStackTrace();
+        }
     }
 
 
