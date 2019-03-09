@@ -6,39 +6,15 @@ import PO61.Bisenov.wdad.learn.xml.JobTitlesEnum;
 
 import java.rmi.RemoteException;
 
-public class JDBCDataManagerTest implements DataManager {
-    public static void main(String[] args) throws RemoteException {
+public class JDBCDataManagerTest {
+    public static void main(String[] args) throws RemoteException, AlreadyAddedException {
         JDBCDataManager manager = new JDBCDataManager();
-        manager.getInfo(); //todo here
-    }
-
-    @Override
-    public int salaryAverage() throws RemoteException {
-        return 0;
-    }
-
-    @Override
-    public int salaryAverage(String departmentName) throws RemoteException {
-        return 0;
-    }
-
-    @Override
-    public void setJobTitle(String firstName, String secondName, JobTitlesEnum newJobTitle) throws RemoteException {
-
-    }
-
-    @Override
-    public void setSalary(String firstName, String secondName, int newSalary) throws RemoteException {
-
-    }
-
-    @Override
-    public void fireEmployee(String firstName, String secondName) throws RemoteException {
-
-    }
-
-    @Override
-    public void add(Department department) throws AlreadyAddedException, RemoteException {
-
+        System.out.println(manager.salaryAverage());
+        System.out.println(manager.salaryAverage("engineering"));
+        manager.setSalary("Artur", "Egorov", 25000);
+        //manager.fireEmployee("Pasha", "Bastrikov");
+        manager.setJobTitle("Artur", "Egorov", JobTitlesEnum.ASSISTANT);
+        Department department = new Department("hr");
+        manager.add(department);
     }
 }
