@@ -22,7 +22,7 @@ public class InsertIntoDBScript {
         String[] secondJobTitlesValues = {"2", "assistant"};
         String[] secondEmployeesValues = {"2", "Pasha", "Bastrikov", "1997-12-30", "2019-07-25", "25000", "2", "1"};
 
-        String[] secondDepartmentValues = {"2", "security", "department of security"};
+        String[] secondDepartmentValues = {"2", "design", "department of security"};
         String[] thirdEmployeesValues = {"3", "Artur", "Egorov", "1998-01-20", "2019-07-26", "30000", "1", "2"};
 
         insertIntoTable(statement, "jobtitles", jobTitlesRows, firstJobTitlesValues);
@@ -34,6 +34,12 @@ public class InsertIntoDBScript {
         insertIntoTable(statement, "employees", employeesRows, firstEmployeesValues);
         insertIntoTable(statement, "employees", employeesRows, secondEmployeesValues);
         insertIntoTable(statement, "employees", employeesRows, thirdEmployeesValues);
+
+        try {
+            statement.close();
+        } catch (SQLException ex){
+            ex.printStackTrace();
+        }
     }
 
     private static void insertIntoTable(Statement statement, String tableName, String[] rows, String[] values) {
