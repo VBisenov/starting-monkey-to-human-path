@@ -33,22 +33,6 @@ public class XmlTask {
 
     }
 
-    public Object loadObjFromXml(String filepath, Class c){
-        Object obj = null;
-        try{
-            StringReader sr = new StringReader(new String(Files.readAllBytes(Paths.get(filepath))));
-            JAXBContext context = JAXBContext.newInstance(c);
-            Unmarshaller unmarshaller = context.createUnmarshaller();
-
-            obj = unmarshaller.unmarshal(sr);
-        }
-        catch (IOException | JAXBException ex) {
-            ex.printStackTrace();
-        }
-        return obj;
-
-    }
-
     public Object loadObjFromXml(String filepath, Class c) {
         Object obj = null;
         try {
